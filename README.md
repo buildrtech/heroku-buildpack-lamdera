@@ -1,7 +1,7 @@
 # heroku-buildpack-lamdera
 
-Push: [![Test](https://github.com/buildr/heroku-buildpack-lamdera/workflows/Test/badge.svg?branch=master&event=push)](https://github.com/buildr/heroku-buildpack-lamdera/actions?query=workflow%3ATest+event%3Apush+branch%3Amaster)
-Scheduled: [![Test](https://github.com/buildr/heroku-buildpack-lamdera/workflows/Test/badge.svg?branch=master&event=schedule)](https://github.com/buildr/heroku-buildpack-lamdera/actions?query=workflow%3ATest+event%3Aschedule+branch%3Amaster)
+Push: [![Test](https://github.com/buildrtech/heroku-buildpack-lamdera/actions/workflows/test.yml/badge.svg?event=push)](https://github.com/buildrtech/heroku-buildpack-lamdera/actions/workflows/test.yml)
+Scheduled: [![Test](https://github.com/buildrtech/heroku-buildpack-lamdera/actions/workflows/test.yml/badge.svg?event=schedule)](https://github.com/buildrtech/heroku-buildpack-lamdera/actions/workflows/test.yml)
 
 A Heroku buildpack for lamdera that always downloads the latest [static build](https://dashboard.lamdera.app/docs/download).
 Unlike other build packs, I never compile anything.
