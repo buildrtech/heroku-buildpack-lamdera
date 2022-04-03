@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+header() {
+  echo "" || true
+  echo "-----> $*" || true
+}
+
+output() {
+  while IFS= read -r LINE; do
+    # do not indent headers that are being piped through the output
+    if [[ "$LINE" =~ ^-----\>.* ]]; then
+      echo "$LINE" || true
+    else
+      echo "       $LINE" || true
+    fi
+  done
+}
+
+header "Installing lamdera"
+
+BUILD_DIR=${1:-}
+VENDOR_DIR="vendor"
+
+cd $BUILD_DIR
+mkdir -p $VENDOR_DIR
+cd $VENDOR_DIR
+mkdir -p lamdera
+cd lamdera
+
+if [[ -z $LAMDERA_DOWNLOAD_URL ]]; then
+  echo "Variable LAMDERA_DOWNLOAD_URL isn't set, using default value" | output
+  LAMDERA_DOWNLOAD_URL="https://static.lamdera.com/bin/linux/lamdera"
+fi
+
+echo "Downloading $LAMDERA_DOWNLOAD_URL" | output
+
+code=$(curl "$LAMDERA_DOWNLOAD_URL" -L --silent --fail --retry 5 --retry-max-time 15 -o ./lamdera --write-out "%{http_code}")
+
+if [ "$code" != "200" ]; then
+  echo "Unable to download lamdera: $code" | output && exit 1
+fi
+
+echo "Unpacking the archive" | output
+
+PROFILE_PATH="$BUILD_DIR/.profile.d/lamdera.sh"
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export PATH="$PATH:${HOME}/vendor/lamdera"' >> $PROFILE_PATH
+
+echo "Installation successful" | output
