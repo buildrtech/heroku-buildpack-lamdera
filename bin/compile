@@ -41,7 +41,7 @@ if [ "$code" != "200" ]; then
   echo "Unable to download lamdera: $code" | output && exit 1
 fi
 
-echo "Unpacking the archive" | output
+chmod a+x ./lamdera
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/lamdera.sh"
 mkdir -p $(dirname $PROFILE_PATH)
