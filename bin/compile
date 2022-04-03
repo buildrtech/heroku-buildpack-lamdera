@@ -23,10 +23,6 @@ BUILD_DIR=${1:-}
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 VENDOR_DIR="vendor"
 
-# Write PATH to $BP_DIR/export so following buildpacks can reference lamdera
-echo "Creating export file in: $(pwd)/export" | output
-echo 'export PATH="$PATH:$HOME/vendor/lamdera"' > export
-
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
@@ -51,5 +47,8 @@ chmod a+x ./lamdera
 PROFILE_PATH="$BUILD_DIR/.profile.d/lamdera.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="$PATH:$HOME/vendor/lamdera"' >> $PROFILE_PATH
+# Write PATH to $BP_DIR/export so following buildpacks can reference lamdera
+echo "Creating export file in: $BP_DIR/export" | output
+echo 'export PATH="$PATH:$HOME/vendor/lamdera"' > $BP_DIR/export
 
 echo "Installation successful" | output
