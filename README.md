@@ -11,7 +11,7 @@ Unlike other build packs, I never compile anything.
 Run the following from the heroku command line:
 
 ```
-heroku buildpacks:add --index 1 https://github.com/buildr/heroku-buildpack-lamdera.git
+heroku buildpacks:add --index 1 https://github.com/buildrtech/heroku-buildpack-lamdera.git
 ```
 
 You can set a custom download URL by setting the variable `LAMDERA_DOWNLOAD_URL`.
